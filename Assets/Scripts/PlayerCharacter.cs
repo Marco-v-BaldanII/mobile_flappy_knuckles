@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
+
+    private HitBox hitBox;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        hitBox = GetComponentInChildren<HitBox>();
+        hitBox.Attach(OnBodyEntered);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void OnBodyEntered()
+    {
+        Debug.Log("on body entered");
     }
 }
