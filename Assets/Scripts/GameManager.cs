@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class GameManager : MonoBehaviour
@@ -16,7 +18,7 @@ public class GameManager : MonoBehaviour
 
         if (instance != null && instance != this)
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
             return;
         }
 
@@ -27,9 +29,9 @@ public class GameManager : MonoBehaviour
 
     public void Subscribe(HitBox box)
     {
-        if (subscribers == null) 
-        { 
-            subscribers = new List<HitBox>(); 
+        if (subscribers == null)
+        {
+            subscribers = new List<HitBox>();
         }
         subscribers.Add(box);
     }
@@ -40,47 +42,54 @@ public class GameManager : MonoBehaviour
         {
             for (int index = subscribers.Count - 1; index >= 0; index--)
             {
-                if (index != _index) /* If both hitboxes aren't the same */
-                {
+                HitBox box = subscribers[index];
+                HitBox box2 = subscribers[_index];
 
-                    var x1 = subscribers[index].GetPos().x; ; var y1 = subscribers[index].GetPos().y;
-                    var x2 = subscribers[_index].GetPos().x; var y2 = subscribers[_index].GetPos().y;
-                    var w1 = subscribers[index].transform.localScale.x; var h1 = subscribers[index].transform.localScale.x;
-                    var w2 = subscribers[_index].transform.localScale.x; var h2 = subscribers[_index].transform.localScale.y;
 
-                    if ((x1 < x2 + w2) && (x1 + w1 > x2) && (y1 < y2 + h2) && (y1 + h1 > y2)) /* If the hitboxes are overlapping */
-                    {
-                        HandleEventCall(subscribers[index]);
-                        HandleEventCall(subscribers[_index]);
-                    }
-                    // The squares are overlapping
-                    else
-                    {
 
-                    }
-                    // The squares are not overlapping
-                }
+                CheckCollision(box, box2);
 
             }
         }
     }
 
-    private void HandleEventCall(HitBox c1 ) /*Check what kind of collision is ocurring*/
+    private void CheckCollision(HitBox box, HitBox box2)
     {
-        if (c1 )
+        bool alreadyColliding = false;
+
+        if (box != box2)
         {
-            if (c1.state == HitBox.COLLIDING_STATE.NONE)
+
+            if (box.colliding.Contains(box2))
             {
-                c1.body_enter.Invoke();
-                c1.state = HitBox.COLLIDING_STATE.ENTERED;
-            }
-            else if (c1.state == HitBox.COLLIDING_STATE.ENTERED || c1.state == HitBox.COLLIDING_STATE.STAY)
-            {
-                c1.body_stay.Invoke();
-                c1.state = HitBox.COLLIDING_STATE.STAY;
+                alreadyColliding = true;
             }
 
+            var x1 = box.GetPos().x;  var y1 = box.GetPos().y;
+            var x2 = box2.GetPos().x; var y2 = box2.GetPos().y;
+            var w1 = box.transform.localScale.x; var h1 = box.transform.localScale.x;
+            var w2 = box2.transform.localScale.x; var h2 = box2.transform.localScale.y;
+
+            if ((x1 < x2 + w2) && (x1 + w1 > x2) && (y1 < y2 + h2) && (y1 + h1 > y2)) /* If the hitboxes are overlapping */
+            {
+                if (alreadyColliding)
+                {
+                    box.body_stay.Invoke(box2);  /* They are still colliding */
+                }
+                else
+                {
+                    box.body_enter.Invoke(box2); /* They have started to collide */
+                    box.colliding.Add(box2); /* List tracks that these 2 bodies are already colliding now */
+                }
+            }
+            else if (alreadyColliding) /* They are no longer colliding */
+            {
+                box.body_exit.Invoke(box2); 
+                box.colliding.Remove(box2); 
+            }
+
+            // The squares are not overlapping
         }
-    }
 
+    }
 }

@@ -13,13 +13,24 @@ public class PhysicBody : MonoBehaviour
         hitBox = GetComponentInChildren<HitBox>();
         if (hitBox != null)
         {
-            hitBox.Attach(OnBodyEntered);
+            hitBox.Attach(OnBodyEntered, OnBodyStay, OnBodyExit);
         }
 
     }
 
-    protected virtual void OnBodyEntered()
+    protected virtual void OnBodyEntered(HitBox box)
     {
         Debug.Log("on body entered");
     }
+
+    protected virtual void OnBodyStay(HitBox box)
+    {
+        Debug.Log("on body stay");
+    }
+
+    protected virtual void OnBodyExit(HitBox box)
+    {
+        Debug.Log("on body exit");
+    }
+
 }

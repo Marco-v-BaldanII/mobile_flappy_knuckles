@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class Player : PhysicBody
 {
-    
 
-    protected override void OnBodyEntered() 
+
+    protected override void OnBodyEntered(HitBox box)
     {
-
+        Debug.Log("on body entered");
     }
+
+    protected override void OnBodyStay(HitBox box)
+    {
+        Debug.Log("on body stay");
+    }
+
+    protected override void OnBodyExit(HitBox box)
+    {
+        Debug.Log("on body exit");
+    }
+
 
 }
