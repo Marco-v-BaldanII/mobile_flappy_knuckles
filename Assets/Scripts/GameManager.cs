@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         {
             for (int index = subscribers.Count - 1; index >= 0; index--)
             {
-                if (index != _index)
+                if (index != _index) /* If both hitboxes aren't the same */
                 {
 
                     var x1 = subscribers[index].GetPos().x; ; var y1 = subscribers[index].GetPos().y;
@@ -48,12 +48,10 @@ public class GameManager : MonoBehaviour
                     var w1 = subscribers[index].transform.localScale.x; var h1 = subscribers[index].transform.localScale.x;
                     var w2 = subscribers[_index].transform.localScale.x; var h2 = subscribers[_index].transform.localScale.y;
 
-                    if ((x1 < x2 + w2) && (x1 + w1 > x2) && (y1 < y2 + h2) && (y1 + h1 > y2))
+                    if ((x1 < x2 + w2) && (x1 + w1 > x2) && (y1 < y2 + h2) && (y1 + h1 > y2)) /* If the hitboxes are overlapping */
                     {
-                        Debug.Log("Collision");
-                        subscribers[_index].body_enter.Invoke();
-
-                        subscribers[index].body_enter.Invoke();
+                        HandleEventCall(subscribers[index]);
+                        HandleEventCall(subscribers[_index]);
                     }
                     // The squares are overlapping
                     else
@@ -64,6 +62,24 @@ public class GameManager : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    private void HandleEventCall(HitBox c1 ) /*Check what kind of collision is ocurring*/
+    {
+        if (c1 )
+        {
+            if (c1.state == HitBox.COLLIDING_STATE.NONE)
+            {
+                c1.body_enter.Invoke();
+                c1.state = HitBox.COLLIDING_STATE.ENTERED;
+            }
+            else if (c1.state == HitBox.COLLIDING_STATE.ENTERED || c1.state == HitBox.COLLIDING_STATE.STAY)
+            {
+                c1.body_stay.Invoke();
+                c1.state = HitBox.COLLIDING_STATE.STAY;
+            }
+
         }
     }
 

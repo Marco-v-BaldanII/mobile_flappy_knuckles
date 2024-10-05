@@ -2,26 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour
+public class PhysicBody : MonoBehaviour
 {
 
     private HitBox hitBox;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         hitBox = GetComponentInChildren<HitBox>();
-        hitBox.Attach(OnBodyEntered);
+        if (hitBox != null)
+        {
+            hitBox.Attach(OnBodyEntered);
+        }
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OnBodyEntered()
+    protected virtual void OnBodyEntered()
     {
         Debug.Log("on body entered");
     }

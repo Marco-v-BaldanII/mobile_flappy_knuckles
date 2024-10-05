@@ -9,8 +9,22 @@ public class HitBox : MonoBehaviour
 {
 
     public UnityEvent body_enter;
+    public UnityEvent body_exit;
+    public UnityEvent body_stay;
 
     const float SCALE_RATIO = 10.0f;
+
+    public List<HitBox> colliding = new List<HitBox>();
+
+    public enum COLLIDING_STATE
+    {
+        ENTERED,
+        STAY,
+        EXIT,
+        NONE
+    }
+
+    public COLLIDING_STATE state = COLLIDING_STATE.NONE;
 
     public int width = 10;
     private int _width
