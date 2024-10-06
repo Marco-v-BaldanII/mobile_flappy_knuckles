@@ -6,7 +6,7 @@ public class KillBox : PhysicBody
 {
     private void Awake()
     {
-
+        
     }
     protected override void OnBodyEntered(HitBox box)
     {
