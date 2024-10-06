@@ -74,10 +74,15 @@ public class GameManager : MonoBehaviour
 
             var x1 = box.GetPos().x;  var y1 = box.GetPos().y;
             var x2 = box2.GetPos().x; var y2 = box2.GetPos().y;
-            var w1 = box.transform.localScale.x; var h1 = box.transform.localScale.x;
-            var w2 = box2.transform.localScale.x; var h2 = box2.transform.localScale.y;
+            var w1 = box.transform.lossyScale.x; var h1 = box.transform.lossyScale.x;
+            var w2 = box2.transform.lossyScale.x; var h2 = box2.transform.lossyScale.y;
 
-            if ((x1 < x2 + w2) && (x1 + w1 > x2) && (y1 < y2 + h2) && (y1 + h1 > y2)) /* If the hitboxes are overlapping */
+            var ty1 = box.GetTopPos().y;
+            var ty2 = box2.GetTopPos().y;
+
+            //((y2 < y1) &&  (y1 < y2 + h2) && (y1 + h1 > y2))
+
+            if ((x1 < x2 + w2) && (x1 + w1 > x2) &&(  (y2 < ty1 && y1 < ty2)  || (y1 < ty2 && ty1 > y2) )) /* If the hitboxes are overlapping */
             {
                 if (alreadyColliding)
                 {

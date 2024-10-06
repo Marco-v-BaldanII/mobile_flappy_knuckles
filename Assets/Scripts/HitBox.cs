@@ -65,6 +65,7 @@ public class HitBox : MonoBehaviour
 
     private Vector2 scale = new Vector2(1, 1);
 
+    private Vector2 downPosition = new Vector2(0, 0);
     private Vector2 topPosition = new Vector2(0, 0);
 
     private Transform shape;
@@ -84,14 +85,16 @@ public class HitBox : MonoBehaviour
 
     }
 
-    public Vector2 GetPos() { return topPosition; }
-
+    public Vector2 GetPos() { return downPosition; }
+    public Vector2 GetTopPos() { return topPosition; }
 
     private void UpKeep()
     {
         _width = width;
-        topPosition = new Vector2(transform.position.x - (scale.x / 2), transform.position.y - (scale.y / 2));
-        Debug.DrawLine(transform.position, topPosition, Color.red);
+        downPosition = new Vector2(transform.position.x - (scale.x / 2), transform.position.y - (scale.y / 2));
+        topPosition = new Vector2(transform.position.x - (scale.x / 2), transform.position.y + (scale.y / 2));
+
+        Debug.DrawLine(transform.position, downPosition, Color.red);
 
         if (shape != null)
         {
