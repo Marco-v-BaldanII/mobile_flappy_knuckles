@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,9 +11,6 @@ public class Player : PhysicBody
     private Animator animator;
 
     private AudioSource audio;
-
-    public int playerScore;
-    public TextMeshProUGUI scoreText;
 
     private bool hit = false;
 
@@ -29,30 +25,26 @@ public class Player : PhysicBody
     {
         Debug.Log("on body entered");
 
-        if (box.GetTag() == "kill" && rigid)
+          if (box.GetTag() == "kill" && rigid)
         { 
-           audio.Play();
+            audio.Play();
 
 
-           if (!hit)
-           {
-               hit = true;
-               Invoke("CallReStart", 1.8f);
-           }
+            if (!hit)
+            {
+                hit = true;
+                Invoke("CallReStart", 1.8f);
+            }
 
-           animator.SetTrigger("hit");
-           rigid.velocity = Vector3.zero;
-           rigid.AddForce(new Vector2(2, 10), ForceMode2D.Impulse);
+            animator.SetTrigger("hit");
+            rigid.velocity = Vector3.zero;
+            rigid.AddForce(new Vector2(2, 10), ForceMode2D.Impulse);
             
         }
         else if (box.GetTag() == "cealing")
         {
             rigid.velocity = Vector3.zero;
             
-        }
-        else if (box.GetTag() == "point")
-        {
-            AddScore();
         }
     }
 
@@ -88,11 +80,6 @@ public class Player : PhysicBody
     private void OnDestroy()
     {
         jump.action.started -= Jump;
-    }
-    public void AddScore()
-    {
-        playerScore++;
-        scoreText.text = playerScore.ToString();
     }
 
 }
