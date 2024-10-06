@@ -25,7 +25,7 @@ public class Player : PhysicBody
     {
         Debug.Log("on body entered");
 
-        if (box.GetTag() == "kill" && rigid)
+          if (box.GetTag() == "kill" && rigid)
         { 
             audio.Play();
 

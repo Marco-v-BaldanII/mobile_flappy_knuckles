@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [ExecuteInEditMode]
 public class HitBox : MonoBehaviour
 {
-    [SerializeField] private String myTag; // tage to check collision type
+    [SerializeField] public String myTag; // tage to check collision type
 
     public UnityEvent<HitBox> body_enter;
     public UnityEvent<HitBox> body_exit;
@@ -16,6 +16,7 @@ public class HitBox : MonoBehaviour
     const float SCALE_RATIO = 10.0f;
 
     public List<HitBox> colliding = new List<HitBox>();
+
 
     public int width = 10;
     private int _width
@@ -64,7 +65,7 @@ public class HitBox : MonoBehaviour
 
     private Vector2 scale = new Vector2(1, 1);
 
-    private Vector2 top_position = new Vector2(0, 0);
+    private Vector2 topPosition = new Vector2(0, 0);
 
     private Transform shape;
 
@@ -83,19 +84,20 @@ public class HitBox : MonoBehaviour
 
     }
 
-    public Vector2 GetPos() { return top_position; }
+    public Vector2 GetPos() { return topPosition; }
 
 
     private void UpKeep()
     {
         _width = width;
-        top_position = new Vector2(transform.position.x - (scale.x / 2), transform.position.y + (scale.y / 2));
-        //Debug.DrawLine(transform.position, top_position, Color.red);
+        topPosition = new Vector2(transform.position.x - (scale.x / 2), transform.position.y - (scale.y / 2));
+        Debug.DrawLine(transform.position, topPosition, Color.red);
 
         if (shape != null)
         {
             scale.x = width / SCALE_RATIO; scale.y = height / SCALE_RATIO;
             shape.localScale = scale;
+            transform.position = shape.position;
         }
         else
         {
