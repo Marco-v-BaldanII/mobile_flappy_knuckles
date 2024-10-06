@@ -117,4 +117,15 @@ public class HitBox : MonoBehaviour
          return myTag;
     }
 
+    public void CleanupAndDestroy()
+    {
+        GameManager.instance.Unsubscribe(this);
+        
+        body_enter.RemoveAllListeners();
+        body_exit.RemoveAllListeners();
+        body_stay.RemoveAllListeners();
+
+        Destroy(gameObject);
+    }
+
 }

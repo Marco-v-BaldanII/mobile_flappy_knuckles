@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PipeScript : MonoBehaviour
 {
 
     public float moveSpeed = 5.0f;
-    private float deathZone = 15;
+    private float deathZone = -45;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +21,17 @@ public class PipeScript : MonoBehaviour
 
         if (transform.position.x < deathZone)
         {
-            //Debug.Log("Pipe Killed");
-            //Destroy(gameObject);
-            
+            Debug.Log("Pipe Killed");
+
+            HitBox[] hitboxes = GetComponentsInChildren<HitBox>();
+
+            foreach (HitBox hitbox in hitboxes)
+            {
+                hitbox.CleanupAndDestroy();
+            }
+
+            Destroy(gameObject);
+
         }
     }
 }

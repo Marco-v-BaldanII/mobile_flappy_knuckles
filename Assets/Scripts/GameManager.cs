@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
     public void Subscribe(HitBox box)
     {
         if (subscribers == null)
@@ -37,6 +36,13 @@ public class GameManager : MonoBehaviour
         subscribers.Add(box);
     }
 
+    public void Unsubscribe(HitBox box)
+    {
+        if (subscribers != null && subscribers.Contains(box))
+        {
+            subscribers.Remove(box);
+        }
+    }
     private void FixedUpdate()
     {
         for (int _index = 0; _index < subscribers.Count; _index++)
