@@ -436,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipe: {fileID: 7492220864162146069, guid: de33e8022b9741f468e0d40d37f0cdb7, type: 3}
   Spawnrate: 2
-  heightOffset: 0.15
+  heightOffset: 1
 --- !u!4 &687761644
 Transform:
   m_ObjectHideFlags: 0
