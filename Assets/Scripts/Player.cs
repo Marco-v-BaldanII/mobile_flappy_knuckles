@@ -10,12 +10,15 @@ public class Player : PhysicBody
     private Rigidbody2D rigid;
     private Animator animator;
 
+    private AudioSource audio;
+
     private bool hit = false;
 
     private void OnEnable()
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
         jump.action.started += Jump;
     }
     protected override void OnBodyEntered(HitBox box)
@@ -23,12 +26,14 @@ public class Player : PhysicBody
         Debug.Log("on body entered");
 
         if (box.GetTag() == "kill" && rigid)
-        {
+        { 
+            audio.Play();
+
 
             if (!hit)
             {
                 hit = true;
-                Invoke("CallReStart", 2.5f);
+                Invoke("CallReStart", 1.8f);
             }
 
             animator.SetTrigger("hit");
@@ -39,6 +44,7 @@ public class Player : PhysicBody
         else if (box.GetTag() == "cealing")
         {
             rigid.velocity = Vector3.zero;
+            
         }
     }
 

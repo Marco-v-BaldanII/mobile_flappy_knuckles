@@ -12,6 +12,8 @@ public class Tails : PhysicBody
 
     private bool hit = false;
 
+    private AudioSource audio;
+
     private void OnEnable()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -25,7 +27,7 @@ public class Tails : PhysicBody
 
         if (box.GetTag() == "kill")
         {
-
+            audio.Play();
             if (!hit)
             {
                 hit = true;
