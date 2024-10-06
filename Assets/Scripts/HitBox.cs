@@ -7,6 +7,7 @@ using UnityEngine.Events;
 [ExecuteInEditMode]
 public class HitBox : MonoBehaviour
 {
+    [SerializeField] private String myTag; // tage to check collision type
 
     public UnityEvent<HitBox> body_enter;
     public UnityEvent<HitBox> body_exit;
@@ -89,7 +90,7 @@ public class HitBox : MonoBehaviour
     {
         _width = width;
         top_position = new Vector2(transform.position.x - (scale.x / 2), transform.position.y + (scale.y / 2));
-        Debug.DrawLine(transform.position, top_position, Color.red);
+        //Debug.DrawLine(transform.position, top_position, Color.red);
 
         if (shape != null)
         {
@@ -109,6 +110,11 @@ public class HitBox : MonoBehaviour
         body_enter.AddListener(enter);
         body_exit.AddListener(exit);
         body_stay.AddListener(stay);
+    }
+
+    public string GetTag()
+    {
+         return myTag;
     }
 
 }

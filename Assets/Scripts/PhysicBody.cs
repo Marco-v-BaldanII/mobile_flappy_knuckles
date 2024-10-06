@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+
+[ExecuteInEditMode]
 public class PhysicBody : MonoBehaviour
 {
 
@@ -16,6 +19,15 @@ public class PhysicBody : MonoBehaviour
             hitBox.Attach(OnBodyEntered, OnBodyStay, OnBodyExit);
         }
 
+    }
+
+    private void Update()
+    {
+        if (hitBox == null)
+        {
+            Debug.LogWarning("Warning ! Object of class Physic body must have a hitbox as child !");
+            hitBox = GetComponentInChildren<HitBox>();
+        }
     }
 
     protected virtual void OnBodyEntered(HitBox box)

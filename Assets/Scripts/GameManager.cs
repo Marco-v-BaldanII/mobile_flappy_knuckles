@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -91,5 +92,12 @@ public class GameManager : MonoBehaviour
             // The squares are not overlapping
         }
 
+    }
+
+
+    public void ReStartLevel()
+    {
+        subscribers.Clear();
+        SceneManager.LoadScene(0);
     }
 }
