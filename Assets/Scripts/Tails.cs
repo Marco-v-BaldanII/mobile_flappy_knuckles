@@ -85,4 +85,10 @@ public class Tails : PhysicBody
         GameManager.instance.ReStartLevel();
     }
 
+    private void OnDestroy()
+    {
+        jump.action.started -= Jump;
+        jump.action.canceled -= StopFlying;
+    }
+
 }

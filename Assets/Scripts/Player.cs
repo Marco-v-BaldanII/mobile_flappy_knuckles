@@ -22,7 +22,7 @@ public class Player : PhysicBody
     {
         Debug.Log("on body entered");
 
-        if (box.GetTag() == "kill")
+        if (box.GetTag() == "kill" && rigid)
         {
 
             if (!hit)
@@ -45,7 +45,7 @@ public class Player : PhysicBody
     protected override void OnBodyStay(HitBox box)
     {
         Debug.Log("on body stay");
-        if (box.GetTag() == "cealing")
+        if (box.GetTag() == "cealing" && rigid)
         {
             rigid.velocity = Vector3.zero;
         }
@@ -59,7 +59,7 @@ public class Player : PhysicBody
 
     public void Jump(InputAction.CallbackContext obj)
     {
-        if (!hit)
+        if (!hit && rigid)
         {
             Debug.Log("Jump");
             rigid.velocity = Vector3.zero;
@@ -70,6 +70,10 @@ public class Player : PhysicBody
     private void CallReStart()
     {
         GameManager.instance.ReStartLevel();
+    }
+    private void OnDestroy()
+    {
+        jump.action.started -= Jump;
     }
 
 }
