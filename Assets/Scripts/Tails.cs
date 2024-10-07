@@ -18,6 +18,9 @@ public class Tails : PhysicBody
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
+
+
         jump.action.started += Jump;
         jump.action.canceled += StopFlying;
     }
@@ -84,7 +87,7 @@ public class Tails : PhysicBody
 
     private void CallReStart()
     {
-        GameManager.instance.ReStartLevel();
+        GameManager.instance.RetryMenu();
     }
 
     private void OnDestroy()

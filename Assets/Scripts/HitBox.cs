@@ -94,7 +94,7 @@ public class HitBox : MonoBehaviour
         downPosition = new Vector2(transform.position.x - (scale.x / 2), transform.position.y - (scale.y / 2));
         topPosition = new Vector2(transform.position.x - (scale.x / 2), transform.position.y + (scale.y / 2));
 
-        Debug.DrawLine(transform.position, downPosition, Color.red);
+        //Debug.DrawLine(transform.position, downPosition, Color.red);
 
         if (shape != null)
         {

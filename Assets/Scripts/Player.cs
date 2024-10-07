@@ -82,7 +82,7 @@ public class Player : PhysicBody
 
     private void CallReStart()
     {
-        GameManager.instance.ReStartLevel();
+        GameManager.instance.RetryMenu();
     }
     private void OnDestroy()
     {

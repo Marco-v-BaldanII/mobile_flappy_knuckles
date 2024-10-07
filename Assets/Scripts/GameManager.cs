@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private List<HitBox> subscribers; // List for the hitboxes to subscribe to the event
+
+    public RetryMenu retryMenu;
+
+    public UnityEvent gameOver;
 
     private void Awake()
     {
@@ -84,7 +89,7 @@ public class GameManager : MonoBehaviour
 
             if ((x1 < x2 + w2) && (x1 + w1 > x2) &&(  (y2 < ty1 && y1 < ty2)  || (y1 < ty2 && ty1 > y2) )) /* If the hitboxes are overlapping */
             {
-                if (alreadyColliding)
+                 if (alreadyColliding)
                 {
                     box.body_stay.Invoke(box2);  /* They are still colliding */
                 }
@@ -110,5 +115,21 @@ public class GameManager : MonoBehaviour
     {
         subscribers.Clear();
         SceneManager.LoadScene(0);
+    }
+
+    public void BackToMenu()
+    {
+        subscribers.Clear();
+        SceneManager.LoadScene(3);
+    }
+
+    public void RetryMenu()
+    {
+        gameOver.Invoke();
+
+        //if (retryMenu)
+        //{
+        //    retryMenu.gameObject.SetActive(true);
+        //}
     }
 }
