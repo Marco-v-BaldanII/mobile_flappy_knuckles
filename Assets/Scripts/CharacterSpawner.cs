@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +12,8 @@ public class CharacterSpawner : MonoBehaviour
 
     public Transform position;
 
+    public TextMeshProUGUI scoreText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +23,22 @@ public class CharacterSpawner : MonoBehaviour
 
         if (character_id == 0)
         {
-            Instantiate(Tails, position.position , Quaternion.identity);
+            var player = Instantiate(Tails, position.position , Quaternion.identity);
+            var tails = player.GetComponent<Tails>();
+            if (tails)
+            {
+                tails.scoreText = scoreText;
+            }
 
         }
         else
         {
-            Instantiate(Knuckles, position.position, Quaternion.identity);
+            var player = Instantiate(Knuckles, position.position, Quaternion.identity);
+            var knuckles = player.GetComponent<Player>();
+            if (knuckles)
+            {
+                knuckles.scoreText = scoreText;
+            }
         }
 
     }

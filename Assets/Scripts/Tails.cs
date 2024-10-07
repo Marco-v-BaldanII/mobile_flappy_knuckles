@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,9 @@ public class Tails : PhysicBody
     private bool hit = false;
 
     private AudioSource audio;
+
+    private int playerScore = 0;
+    public TextMeshProUGUI scoreText;
 
     private void OnEnable()
     {
@@ -31,6 +35,7 @@ public class Tails : PhysicBody
         if (box.GetTag() == "kill")
         {
             audio.Play();
+
             if (!hit)
             {
                 hit = true;
@@ -45,6 +50,10 @@ public class Tails : PhysicBody
         else if (box.GetTag() == "cealing")
         {
             rigid.velocity = Vector3.zero;
+        }
+        else if (box.GetTag() == "point")
+        {
+            IncrementScore();
         }
     }
 
@@ -96,4 +105,9 @@ public class Tails : PhysicBody
         jump.action.canceled -= StopFlying;
     }
 
+    private void IncrementScore()
+    {
+        playerScore++;
+        scoreText.text = playerScore.ToString();
+    }
 }
