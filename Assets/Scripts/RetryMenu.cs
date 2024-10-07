@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class RetryMenu : MonoBehaviour
 {
+
+    public TextMeshProUGUI scoreText;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -25,5 +30,13 @@ public class RetryMenu : MonoBehaviour
     {
         GameManager.instance.BackToMenu();
     }
-    
+
+    private void OnEnable()
+    {
+        int score = PlayerPrefs.GetInt("score");
+
+
+        scoreText.text = "HighScore :" + score.ToString();
+    }
+
 }

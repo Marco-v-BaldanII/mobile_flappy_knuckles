@@ -132,4 +132,15 @@ public class GameManager : MonoBehaviour
         //    retryMenu.gameObject.SetActive(true);
         //}
     }
+
+    public void CheckScore(int score)
+    {
+        var currentHighScore = PlayerPrefs.GetInt("score");
+        if (score > currentHighScore)
+        {
+            PlayerPrefs.SetInt("score", score);
+        }
+
+    }
+
 }

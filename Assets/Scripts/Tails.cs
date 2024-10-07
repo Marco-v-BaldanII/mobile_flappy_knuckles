@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -35,6 +36,8 @@ public class Tails : PhysicBody
         if (box.GetTag() == "kill")
         {
             audio.Play();
+
+            GameManager.instance.CheckScore(Convert.ToInt32(scoreText.text));
 
             if (!hit)
             {

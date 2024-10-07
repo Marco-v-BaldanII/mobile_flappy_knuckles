@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System;
 
 public class Player : PhysicBody
 {
@@ -32,6 +33,13 @@ public class Player : PhysicBody
         if (box.GetTag() == "kill" && rigid)
         { 
             audio.Play();
+            var hitbox = GetComponent<HitBox>();
+            if (hitbox)
+            {
+                hitbox.gameObject.SetActive(false);
+            }
+
+            GameManager.instance.CheckScore(Convert.ToInt32(scoreText.text));
 
                if (!hit)
                {
