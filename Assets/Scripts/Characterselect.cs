@@ -46,7 +46,7 @@ public class Characterselect : MonoBehaviour
         {
 
             PlayerPrefs.SetInt("character", index);
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("SampleScene");
 
         }
 

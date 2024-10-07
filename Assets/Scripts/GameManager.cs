@@ -114,13 +114,13 @@ public class GameManager : MonoBehaviour
     public void ReStartLevel()
     {
         subscribers.Clear();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void BackToMenu()
     {
         subscribers.Clear();
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("TitleScreen");
     }
 
     public void RetryMenu()

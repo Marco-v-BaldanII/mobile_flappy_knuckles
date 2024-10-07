@@ -16,7 +16,7 @@ public class TitleScreen : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("CharacterSelection");
         }
     }
 }
