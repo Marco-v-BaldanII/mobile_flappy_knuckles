@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PipeMoveScript : MonoBehaviour
 {
-    public GameObject Pipe;
+    public GameObject pipe;
     public float SpawnRate = 2.0f;
-    private float Timer = 0;
+    private float timer = 0;
     public float heightOffset = 1f;
     // Start is called before the first frame update
     void Start()
@@ -17,14 +17,14 @@ public class PipeMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Timer < SpawnRate)
+        if (timer < SpawnRate)
         {
-            Timer += Time.deltaTime;
+            timer += Time.deltaTime;
         }
         else
         {
             SpawnPipe();
-            Timer = 0;
+            timer = 0;
         }
         
     }
@@ -34,7 +34,7 @@ public class PipeMoveScript : MonoBehaviour
         float lowestPoint = transform.position.y - heightOffset;
         float highestPoint = transform.position.y + heightOffset;
 
-        Instantiate(Pipe, new Vector2(transform.position.x, Random.Range(lowestPoint, highestPoint)), transform.rotation);
+        Instantiate(pipe, new Vector2(transform.position.x, Random.Range(lowestPoint, highestPoint)), transform.rotation);
     }
 
 }

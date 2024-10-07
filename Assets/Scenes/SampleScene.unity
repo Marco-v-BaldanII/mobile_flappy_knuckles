@@ -696,7 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a441db7d33cbff4e81298ee419f337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pipe: {fileID: 4582530247766858017, guid: de33e8022b9741f468e0d40d37f0cdb7, type: 3}
+  pipe: {fileID: 4582530247766858017, guid: de33e8022b9741f468e0d40d37f0cdb7, type: 3}
   SpawnRate: 3
   heightOffset: 1
 --- !u!4 &687761644

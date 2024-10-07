@@ -8,18 +8,18 @@ public class Parallax : MonoBehaviour
 
     public Transform[] backgrounds;
 
-    private Vector3 parallax_movement;
+    private Vector3 parallaxMovement;
 
-    private float spawn_pos;
+    private float spawnPos;
 
     public float speed = -0.1f;
 
     // Start is called before the first frame update
     void Start()
     {
-        parallax_movement = new Vector3(speed, 0, 0);
+        parallaxMovement = new Vector3(speed, 0, 0);
 
-        spawn_pos = backgrounds[1].position.x;
+        spawnPos = backgrounds[1].position.x;
     }
 
     // Update is called once per frame
@@ -27,11 +27,11 @@ public class Parallax : MonoBehaviour
     {
         foreach (Transform background in backgrounds)
         {
-            background.position += parallax_movement;
+            background.position += parallaxMovement;
 
             if (background.transform.localPosition.x < -28.65)
             {
-                background.position = new Vector3(spawn_pos, background.position.y, background.position.z);
+                background.position = new Vector3(spawnPos, background.position.y, background.position.z);
             }
         }
     }
